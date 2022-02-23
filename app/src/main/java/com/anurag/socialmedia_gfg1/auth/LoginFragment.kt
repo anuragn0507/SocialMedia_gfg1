@@ -2,6 +2,8 @@ package com.anurag.socialmedia_gfg1.auth
 
 import android.app.FragmentManager
 import android.os.Bundle
+import android.text.TextUtils
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -47,9 +49,23 @@ class LoginFragment : Fragment() {
             emailText.error = null
             passwordText.error = null
 
-            
+            if (TextUtils.isEmpty(email)) {
+                emailText.error = "Email is required"
+                return@setOnClickListener
+            }
+
+            if (TextUtils.isEmpty(password)) {
+                passwordText.error = "Password is required"
+                return@setOnClickListener
+            }
+
+            if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                emailText.error= "Please enter a valid email address"
+                return@setOnClickListener
+
+            }
+
+            loginProgress.visibility = View.VISIBLE
         }
     }
-
-
 }

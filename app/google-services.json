@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "21743068627",
+    "project_id": "socialmediagfg-cf46e",
+    "storage_bucket": "socialmediagfg-cf46e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:21743068627:android:b9cc533eff962642903b26",
+        "android_client_info": {
+          "package_name": "com.anurag.socialmedia_gfg1"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "21743068627-iigqtdjj9kcv7lol21g79htp7nasdpee.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCc3H8U_kq-626UT38i7r1FhezyDWO1eFg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "21743068627-iigqtdjj9kcv7lol21g79htp7nasdpee.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
