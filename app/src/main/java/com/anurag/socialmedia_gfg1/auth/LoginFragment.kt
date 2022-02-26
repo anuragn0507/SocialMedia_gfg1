@@ -1,20 +1,30 @@
 package com.anurag.socialmedia_gfg1.auth
 
 import android.app.FragmentManager
+import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Log
 import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
+import com.anurag.socialmedia_gfg1.MainActivity
 import com.anurag.socialmedia_gfg1.R
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.FirebaseAuth
 
 
 class LoginFragment : Fragment() {
+
+    companion object{
+        const val TAG ="LoginFragment"
+    }
 
 
     override fun onCreateView(
@@ -40,7 +50,7 @@ class LoginFragment : Fragment() {
         val emailText:TextInputLayout = view.findViewById(R.id.email_text)
         val passwordText:TextInputLayout = view.findViewById(R.id.password_text)
         val loginButton: Button = view.findViewById(R.id.login_button)
-        val loginProgress:TextInputLayout = view.findViewById(R.id.login_progress)
+        val loginProgress:ProgressBar = view.findViewById(R.id.login_progress)
 
         loginButton.setOnClickListener {
             val email = emailText.editText?.text.toString()
@@ -66,6 +76,18 @@ class LoginFragment : Fragment() {
             }
 
             loginProgress.visibility = View.VISIBLE
+
+            FirebaseAuth.getInstance().signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener{task ->
+                    loginProgress.visibility = View.GONE
+                    if (task.isSuccessful){
+                        val intent = Intent(activity, MainActivity::class.java)
+                        startActivity(intent)
+                    }else{
+                        Toast.makeText(activity, "Something went wrong, please try again", Toast.LENGTH_LONG).show()
+                        Log.e(TAG, task.exception.toString())
+                    }
+                }
         }
     }
 }
