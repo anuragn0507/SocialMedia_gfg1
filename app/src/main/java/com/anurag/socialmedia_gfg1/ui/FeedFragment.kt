@@ -34,6 +34,7 @@ class FeedFragment : Fragment() {
             val intent = Intent(activity, CreatePostActivity:: class.java)
             startActivity(intent)
         }
+
     }
 
 
