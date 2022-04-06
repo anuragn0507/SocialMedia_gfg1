@@ -34,7 +34,6 @@ class FeedFragment : Fragment() {
             val intent = Intent(activity, CreatePostActivity:: class.java)
             startActivity(intent)
         }
-        recyclerView = view.findViewById(R.id.fee)
     }
 
 
