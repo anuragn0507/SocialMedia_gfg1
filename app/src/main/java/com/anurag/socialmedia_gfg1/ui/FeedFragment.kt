@@ -25,15 +25,7 @@ class FeedFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
 
-        val fab: FloatingActionButton = view.findViewById(R.id.create_post_fab)
-
-        fab.setOnClickListener {
-            val intent = Intent(activity, CreatePostActivity:: class.java)
-            startActivity(intent)
-        }
 
     }
 
