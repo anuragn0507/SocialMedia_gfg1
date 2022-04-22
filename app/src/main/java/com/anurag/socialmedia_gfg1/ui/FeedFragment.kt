@@ -49,9 +49,8 @@ class FeedFragment : Fragment() {
 
         val recyclerViewOptions = FirestoreRecyclerOptions.Builder<Post>().setQuery(query, Post::class.java)
 
-        adapter = context?.let {
-            FeedAdapter(recyclerViewOptions, it)
-        }
+
+
 
     }
 }
