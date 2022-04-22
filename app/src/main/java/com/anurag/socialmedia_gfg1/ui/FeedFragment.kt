@@ -49,7 +49,8 @@ class FeedFragment : Fragment() {
 
         val recyclerViewOptions = FirestoreRecyclerOptions.Builder<Post>().setQuery(query, Post::class.java)
 
-
+       //testing push
+        val
 
 
     }
