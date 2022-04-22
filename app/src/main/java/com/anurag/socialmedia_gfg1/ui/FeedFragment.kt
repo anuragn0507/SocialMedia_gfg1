@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.anurag.socialmedia_gfg1.R
 import com.anurag.socialmedia_gfg1.adapters.FeedAdapter
+import com.anurag.socialmedia_gfg1.models.Post
+import com.firebase.ui.firestore.FirestoreRecyclerOptions
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -45,9 +47,11 @@ class FeedFragment : Fragment() {
         val firestore = FirebaseFirestore.getInstance()
         val query  = firestore.collection("Posts")
 
+        val recyclerViewOptions = FirestoreRecyclerOptions.Builder<Post>().setQuery(query, Post::class.java)
+
+        adapter = context?.let {
+            FeedAdapter(recyclerViewOptions, it)
+        }
+
     }
-
-
-
-
 }

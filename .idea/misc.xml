@@ -11,6 +11,7 @@
         <entry key="..\:/Users/yadav/AndroidStudioProjects/SocialMedia_gfg1/app/src/main/res/layout/activity_create_post.xml" value="0.2864583333333333" />
         <entry key="..\:/Users/yadav/AndroidStudioProjects/SocialMedia_gfg1/app/src/main/res/layout/activity_main.xml" value="0.2864583333333333" />
         <entry key="..\:/Users/yadav/AndroidStudioProjects/SocialMedia_gfg1/app/src/main/res/layout/fragment_blank.xml" value="0.2864583333333333" />
+        <entry key="..\:/Users/yadav/AndroidStudioProjects/SocialMedia_gfg1/app/src/main/res/layout/fragment_chatrooms.xml" value="0.2864583333333333" />
         <entry key="..\:/Users/yadav/AndroidStudioProjects/SocialMedia_gfg1/app/src/main/res/layout/fragment_feed.xml" value="0.2864583333333333" />
         <entry key="..\:/Users/yadav/AndroidStudioProjects/SocialMedia_gfg1/app/src/main/res/layout/fragment_login.xml" value="0.2864583333333333" />
         <entry key="..\:/Users/yadav/AndroidStudioProjects/SocialMedia_gfg1/app/src/main/res/layout/fragment_register.xml" value="0.2864583333333333" />
@@ -21,7 +22,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_16_PREVIEW" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_16" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
