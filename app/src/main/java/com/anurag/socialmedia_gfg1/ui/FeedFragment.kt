@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anurag.socialmedia_gfg1.R
 import com.anurag.socialmedia_gfg1.adapters.FeedAdapter
@@ -18,7 +19,7 @@ import com.google.firebase.firestore.FirebaseFirestore
 class FeedFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var adapter : FeedAdapter
+    private  var feedAdapter : FeedAdapter? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,9 +48,25 @@ class FeedFragment : Fragment() {
         val firestore = FirebaseFirestore.getInstance()
         val query  = firestore.collection("Posts")
 
-        val recyclerViewOptions = FirestoreRecyclerOptions.Builder<Post>().setQuery(query, Post::class.java)
+        val recyclerViewOptions = FirestoreRecyclerOptions.Builder<Post>().setQuery(query, Post::class.java).build()
 
+        feedAdapter = context?.let {
+            FeedAdapter(recyclerViewOptions, it)
+        }
 
+        recyclerView.adapter = feedAdapter
 
+        recyclerView.layoutManager = LinearLayoutManager(activity)
+
+    }
+
+    override fun onStart() {
+        super.onStart()
+        feedAdapter?.startListening()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        feedAdapter?.stopListening()
     }
 }

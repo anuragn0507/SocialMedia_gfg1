@@ -19,6 +19,15 @@ plugins {
     id 'org.jetbrains.kotlin.android' version '1.6.10' apply false
 }
 
+allprojects{
+    repositories {
+        google() // Google's Maven repository
+        mavenCentral()
+        maven{ url 'https://jitpack.io'}
+    }
+
+}
+
 
 
 task clean(type: Delete) {

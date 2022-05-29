@@ -6,12 +6,15 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.anurag.socialmedia_gfg1.R
 import com.anurag.socialmedia_gfg1.models.Post
 import com.bumptech.glide.Glide
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter
 import com.firebase.ui.firestore.FirestoreRecyclerOptions
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import org.w3c.dom.Text
 
 //FirestoreRecyclerAdapter
@@ -47,7 +50,27 @@ class FeedAdapter (options : FirestoreRecyclerOptions<Post>, val context: Contex
 
         holder.likeCount.text = model.likesList.size.toString()
 
+        val firestore = FirebaseFirestore.getInstance()
+        val userId  = FirebaseAuth.getInstance().currentUser?.uid
 
+        val postDocument = firestore.collection("Posts")
+            .document(snapshots.getSnapshot(position).id)
+
+        postDocument.get().addOnCompleteListener {
+           if(it.isSuccessful){
+               val post = it.result?.toObject(Post::class.java)
+               post?.likesList?.let{ list ->
+                   if (list.contains(userId)){
+                       //User has liked this post
+                       holder.likeIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_icon_filled))
+                   } else{
+                       // User has not liked ;this post
+                       holder.likeIcon.setImageDrawable(ContextCompat.getDrawable(context, R.drawable.like_icon_outline))
+                   }
+
+               }
+           }
+        }
         
 
 
