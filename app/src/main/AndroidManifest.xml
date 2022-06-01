@@ -12,13 +12,14 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.SocialMedia_gfg1">
         <activity
+            android:name=".ui.CommentsActivity"
+            android:exported="false" />
+        <activity
             android:name=".ui.CreatePostActivity"
             android:exported="false" />
         <activity
             android:name=".auth.AuthenticationActivity"
-            android:exported="false">
-
-        </activity>
+            android:exported="false"></activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
