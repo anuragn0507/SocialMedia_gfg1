@@ -34,7 +34,7 @@ class FeedAdapter (options : FirestoreRecyclerOptions<Post>, val context: Contex
         val likeIcon: ImageView = itemView.findViewById(R.id.like_icon)
         val likeCount: TextView = itemView.findViewById(R.id.like_count)
         val commentIcon: ImageView = itemView.findViewById(R.id.comment_icon)
-        val commentText: TextView = itemView.findViewById(R.id.comment_count)
+        val commentCount: TextView = itemView.findViewById(R.id.comment_count)
 
     }
 
@@ -108,10 +108,11 @@ class FeedAdapter (options : FirestoreRecyclerOptions<Post>, val context: Contex
             context.startActivity(intent)
         }
 
+        postDocument.collection("Comments").get().addOnCompleteListener {
+            if(it.isSuccessful){
+                holder.commentCount.text = it.result?.size().toString()
 
-        
+            }
+        }
     }
-
-
-
 }

@@ -36,7 +36,6 @@ class CommentAdapter(options: FirestoreRecyclerOptions<Comment>) :
 
         holder.commentTime.text = dateFormatted
 
-
     }
 
 }

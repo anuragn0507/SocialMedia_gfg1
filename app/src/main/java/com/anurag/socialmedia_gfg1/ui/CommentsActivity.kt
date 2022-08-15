@@ -30,14 +30,14 @@ class CommentsActivity : AppCompatActivity() {
         setContentView(R.layout.activity_comments)
 
         if(intent.hasExtra("PostID")){
-            postId = intent.getStringExtra("PostId")
+            postId = intent.getStringExtra("PostID")
         }
 
         commentsRecyclerView = findViewById(R.id.comment_rv)
         setupRecyclerView()
 
         val commentEditText : EditText = findViewById(R.id.enter_comment)
-        val sendIcon : ImageView = findViewById(R.id.send_comment)
+        val sendIcon : ImageView = findViewById(R.id.send_message)
 
         sendIcon.setOnClickListener {
             val commentText  = commentEditText.text.toString()
@@ -48,11 +48,7 @@ class CommentsActivity : AppCompatActivity() {
             }
             val firestore = FirebaseFirestore.getInstance()
             val comment = UserUtils.user?.let{ currentUser ->
-                Comment(
-                    commentText,
-                    currentUser,
-                    System.currentTimeMillis()
-                )
+                Comment(commentText, currentUser, System.currentTimeMillis())
             }
             postId?.let { postId->
                 comment?.let { comment ->
@@ -60,7 +56,6 @@ class CommentsActivity : AppCompatActivity() {
                         .document().set(comment)
                 }
             }
-
             commentEditText.text.clear()
         }
     }
@@ -68,7 +63,7 @@ class CommentsActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         val firestore = FirebaseFirestore.getInstance()
         val query = postId?.let{
-            firestore.collection("Posts").document(it).collection("Comments")
+            firestore.collection("Posts").document(it).collection("Comments").orderBy("time")
         }
 
         val firestoreRecyclerOptions = query?.let{
