@@ -39,6 +39,7 @@ class SearchAdapter(options: FirestoreRecyclerOptions<User>,val context:Context 
                         .placeholder(R.drawable.person_icon_black)
                         .centerCrop()
                         .into(holder.userImage)
+                    //add some changes...
                 }
             }
     }
