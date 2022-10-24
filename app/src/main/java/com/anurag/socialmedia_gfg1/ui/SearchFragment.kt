@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.Toolbar
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.anurag.socialmedia_gfg1.MainActivity
 import com.anurag.socialmedia_gfg1.R
@@ -48,5 +49,10 @@ class SearchFragment : Fragment() {
        context?.let{
            searchAdapter = SearchAdapter(firestoreRecyclerOptions, it)
        }
+        searchRecyclerView = view.findViewById(R.id.search_rv)
+
+        searchRecyclerView.adapter = searchAdapter
+        searchRecyclerView.layoutManager = LinearLayoutManager(context)
     }
+
 }
