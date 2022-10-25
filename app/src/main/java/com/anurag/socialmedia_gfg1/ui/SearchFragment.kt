@@ -2,6 +2,7 @@ package com.anurag.socialmedia_gfg1.ui
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.Toolbar
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -57,6 +58,8 @@ class SearchFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
 
         inflater.inflate(R.menu.source_menu, menu)
+        val searchView =  SearchView(requireContext())
+
     }
 
 }
