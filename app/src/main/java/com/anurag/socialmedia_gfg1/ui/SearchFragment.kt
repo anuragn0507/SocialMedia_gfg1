@@ -60,6 +60,7 @@ class SearchFragment : Fragment() {
         inflater.inflate(R.menu.source_menu, menu)
         val searchView =  SearchView(requireContext())
 
+        menu.findItem(R.id.action_search).actionView = searchView
     }
 
 }
