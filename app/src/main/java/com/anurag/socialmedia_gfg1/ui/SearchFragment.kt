@@ -63,7 +63,17 @@ class SearchFragment : Fragment() {
         menu.findItem(R.id.action_search).actionView = searchView
         searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(query: String?): Boolean {
-                TODO("Not yet implemented")
+                searchRecyclerView.visibility = View.VISIBLE
+
+                val firestore= FirebaseFirestore.getInstance()
+
+                val newQuery = firestore.collection("Users").whereEqualTo("name", query)
+                    .whereNotEqualTo("id", UserUtils.user?.id)
+
+                val newFirestoreRecyclerOptions = FirestoreRecyclerOptions.Builder<User>()
+                    .setQuery(newQuery, User::class.java).build()
+                searchAdapter?.updateOptions(newFirestoreRecyclerOptions)
+                return true
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
