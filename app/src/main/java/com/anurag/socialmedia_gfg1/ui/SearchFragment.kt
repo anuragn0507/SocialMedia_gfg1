@@ -67,7 +67,8 @@ class SearchFragment : Fragment() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {
-                TODO("Not yet implemented")
+                searchRecyclerView.visibility =  View.INVISIBLE
+                return false
             }
 
         })
