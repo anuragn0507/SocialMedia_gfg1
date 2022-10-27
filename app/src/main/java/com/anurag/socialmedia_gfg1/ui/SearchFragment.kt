@@ -61,6 +61,16 @@ class SearchFragment : Fragment() {
         val searchView =  SearchView(requireContext())
 
         menu.findItem(R.id.action_search).actionView = searchView
+        searchView.setOnQueryTextListener(object: SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                TODO("Not yet implemented")
+            }
+
+        })
     }
 
 }
