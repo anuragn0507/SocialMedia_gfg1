@@ -1,5 +1,6 @@
 package com.anurag.socialmedia_gfg1.auth
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -28,6 +29,8 @@ class RegisterFragment : Fragment() {
         const val TAG = "RegisterFragment"
     }
 
+    private var callback: AuthInterface?=null
+
     val passwordRegex = Regex("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")
 
     override fun onCreateView(
@@ -36,6 +39,11 @@ class RegisterFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_register, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = context as AuthInterface
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -115,8 +123,7 @@ class RegisterFragment : Fragment() {
                             .addOnCompleteListener {task2 ->
                                 registerProgress.visibility = View.GONE
                                 if(task2.isSuccessful) {
-                                    val intent = Intent(activity, MainActivity::class.java)
-                                    startActivity(intent)
+                                    callback?.onSuccessfulAuth()
                                 }else{
                                     Toast.makeText(activity, "Something went wrong, please try again", Toast.LENGTH_LONG).show()
                                     Log.e(LoginFragment.TAG, task.exception.toString())

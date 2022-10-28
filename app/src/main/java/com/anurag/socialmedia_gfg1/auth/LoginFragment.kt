@@ -88,9 +88,7 @@ class LoginFragment : Fragment() {
                 .addOnCompleteListener{task ->
                     loginProgress.visibility = View.GONE
                     if (task.isSuccessful){
-                        val intent = Intent(activity, MainActivity::class.java)
-                        startActivity(intent)
-                        activity?.finish()
+                        callback?.onSuccessfulAuth()
                     }else{
                         Toast.makeText(activity, "Something went wrong, please try again", Toast.LENGTH_LONG).show()
                         Log.e(TAG, task.exception.toString())
