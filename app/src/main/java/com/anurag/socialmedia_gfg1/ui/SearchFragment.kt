@@ -84,4 +84,14 @@ class SearchFragment : Fragment() {
         })
     }
 
+    override fun onStart() {
+        super.onStart()
+        searchAdapter?.stopListening()
+
+    }
+
+    override fun onStop() {
+        super.onStop()
+        searchAdapter?.stopListening()
+    }
 }
