@@ -83,6 +83,7 @@ class LoginFragment : Fragment() {
                     if (task.isSuccessful){
                         val intent = Intent(activity, MainActivity::class.java)
                         startActivity(intent)
+                        activity?.finish()
                     }else{
                         Toast.makeText(activity, "Something went wrong, please try again", Toast.LENGTH_LONG).show()
                         Log.e(TAG, task.exception.toString())
