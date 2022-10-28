@@ -25,6 +25,7 @@ class LoginFragment : Fragment() {
     companion object{
         const val TAG ="LoginFragment"
     }
+    private val callback: AuthInterface?= null
 
 
     override fun onCreateView(

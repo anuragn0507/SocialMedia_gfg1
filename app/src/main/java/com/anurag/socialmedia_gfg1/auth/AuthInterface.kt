@@ -1,5 +1,5 @@
 package com.anurag.socialmedia_gfg1.auth
 
-class AuthInterface {
-
+interface AuthInterface {
+    fun onSuccessfulAuth()
 }
