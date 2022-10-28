@@ -1,6 +1,7 @@
 package com.anurag.socialmedia_gfg1.auth
 
 import android.app.FragmentManager
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.text.TextUtils
@@ -25,7 +26,7 @@ class LoginFragment : Fragment() {
     companion object{
         const val TAG ="LoginFragment"
     }
-    private val callback: AuthInterface?= null
+    private var callback: AuthInterface?= null
 
 
     override fun onCreateView(
@@ -34,6 +35,11 @@ class LoginFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_login, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = context as AuthInterface
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
