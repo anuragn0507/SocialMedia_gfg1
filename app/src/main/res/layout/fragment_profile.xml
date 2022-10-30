@@ -28,6 +28,31 @@
       app:layout_constraintTop_toBottomOf="@+id/user_image"
       app:layout_constraintStart_toStartOf="parent"/>
 
+   <EditText
+       android:id="@+id/user_bio"
+       android:layout_width="match_parent"
+       android:layout_height="200dp"
+       android:background="@drawable/post_text_shape"
+       android:padding="16dp"
+       android:textColor="@color/black"
+      android:hint="Bio"
+      android:layout_margin="24dp"
+      android:gravity="start"
+      app:layout_constraintTop_toBottomOf="@+id/user_name"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintEnd_toEndOf="parent" />
+
+   <Button
+       android:id="@+id/save_button"
+       android:layout_width="match_parent"
+       android:layout_height="48dp"
+       android:layout_margin="24dp"
+       android:textColor="@color/white"
+       android:text="Save"
+       app:layout_constraintTop_toBottomOf="@+id/user_bio"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+      />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
