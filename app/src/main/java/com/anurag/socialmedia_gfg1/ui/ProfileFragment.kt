@@ -9,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.EditText
 import com.anurag.socialmedia_gfg1.R
 import com.anurag.socialmedia_gfg1.utils.UserUtils
+import com.bumptech.glide.Glide
+import com.github.dhaval2404.imagepicker.ImagePicker
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -35,7 +37,19 @@ class ProfileFragment : Fragment() {
         userName.setText(UserUtils.user?.name)
         userBio.setText(UserUtils.user?.bio)
 
+        userImage.setOnClickListener{
+            ImagePicker.with(this)
+                .crop()
+                .compress(1024)
+                .maxResultSize(1080, 1080)
+                .start()
+        }
 
+        Glide.with(requireContext())
+            .load(UserUtils.user?.imageUrl)
+            .placeholder(R.drawable.person_icon_black)
+            .centerCrop()
+            .into(userImage)
     }
 
 
