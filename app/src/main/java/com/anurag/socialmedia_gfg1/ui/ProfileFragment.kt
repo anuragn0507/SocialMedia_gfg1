@@ -1,7 +1,11 @@
 package com.anurag.socialmedia_gfg1.ui
 
+import android.app.Activity
+import android.content.Context
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,12 +19,14 @@ import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import de.hdodenhof.circleimageview.CircleImageView
 
 
 class ProfileFragment : Fragment() {
     private lateinit var userImage: CircleImageView
     private var imageUri: Uri?= null
+    private var callback:LogOutInterface?= null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,6 +34,11 @@ class ProfileFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_profile, container, false)
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        callback = context as LogOutInterface
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -80,8 +91,44 @@ class ProfileFragment : Fragment() {
 
         logoutButton.setOnClickListener {
             FirebaseAuth.getInstance().signOut()
+            callback?.logout()
         }
     }
 
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if(resultCode == Activity.RESULT_OK){
+            val fileUri = data?.data
+            userImage.setImageURI(fileUri)
+            imageUri = fileUri
+            addUserImage()
+        }else if(resultCode == ImagePicker.RESULT_ERROR){
+            Toast.makeText(context, ImagePicker.getError(data), Toast.LENGTH_LONG).show()
+        }else{
+            Toast.makeText(context, "Something went wrong. Please try again ", Toast.LENGTH_LONG).show()
+        }
+    }
+    private fun addUserImage(){
+        val fireStore = FirebaseFirestore.getInstance()
+        fireStore.collection("Users")
+            .document(UserUtils.user?.id.toString())
+            .get().addOnCompleteListener {
+                val storage = FirebaseStorage.getInstance().reference.child("Images")
+                    .child(UserUtils.user?.id.toString() + ".jpg")
+
+                val uploadTask = imageUri?.let { it1 -> storage.putFile(it1) }
+
+                uploadTask?.continueWithTask{task ->
+                    if(!task.isSuccessful){
+                        Log.e("Upload Task", task.exception.toString())
+                        task.exception?.let {
+                            throw it
+                        }
+                    }
+                    storage.downloadUrl
+                }
+            }
+    }
 
 }
