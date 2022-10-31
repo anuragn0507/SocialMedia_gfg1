@@ -13,6 +13,7 @@ import com.anurag.socialmedia_gfg1.models.User
 import com.anurag.socialmedia_gfg1.utils.UserUtils
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
 
@@ -67,7 +68,18 @@ class ProfileFragment : Fragment() {
                 .document(UserUtils.user?.id.toString())
 
             val user = User(id= UserUtils.user?.id.toString(), name = newUserName, email = UserUtils.user?.email.toString(), bio= newBio)
-            userDocument.set(user)
+            userDocument.set(user).addOnCompleteListener {
+                if(it.isSuccessful){
+                    Toast.makeText(context,"Profile Updated", Toast.LENGTH_LONG).show()
+                    UserUtils.getCurrentUser()
+                }else{
+                    Toast.makeText(context, "Something went wrong. Please try again later", Toast.LENGTH_LONG).show()
+                }
+            }
+        }
+
+        logoutButton.setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
         }
     }
 
