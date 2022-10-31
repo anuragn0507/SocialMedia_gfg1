@@ -7,10 +7,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
+import android.widget.Toast
 import com.anurag.socialmedia_gfg1.R
+import com.anurag.socialmedia_gfg1.models.User
 import com.anurag.socialmedia_gfg1.utils.UserUtils
 import com.bumptech.glide.Glide
 import com.github.dhaval2404.imagepicker.ImagePicker
+import com.google.firebase.firestore.FirebaseFirestore
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -50,6 +53,22 @@ class ProfileFragment : Fragment() {
             .placeholder(R.drawable.person_icon_black)
             .centerCrop()
             .into(userImage)
+
+        saveButton.setOnClickListener {
+            val newUserName = userName.text.toString()
+            val newBio = userBio.text.toString()
+
+            if (newUserName.isBlank()){
+                Toast.makeText(context, "Name field cannot be blank", Toast.LENGTH_LONG).show()
+                return@setOnClickListener
+            }
+
+            val userDocument = FirebaseFirestore.getInstance().collection("Users")
+                .document(UserUtils.user?.id.toString())
+
+            val user = User(id= UserUtils.user?.id.toString(), name = newUserName, email = UserUtils.user?.email.toString(), bio= newBio)
+            userDocument.set(user)
+        }
     }
 
 
