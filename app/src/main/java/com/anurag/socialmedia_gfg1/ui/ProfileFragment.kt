@@ -127,6 +127,11 @@ class ProfileFragment : Fragment() {
                         }
                     }
                     storage.downloadUrl
+                }?.addOnCompleteListener { urlTaskCompleted ->
+                    if(urlTaskCompleted.isSuccessful){
+                        val downloadUri = urlTaskCompleted.result
+                        val newUser = User(id= UserUtils.user?.id)
+                    }
                 }
             }
     }
