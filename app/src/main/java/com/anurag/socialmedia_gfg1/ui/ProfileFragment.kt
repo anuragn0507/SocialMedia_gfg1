@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.EditText
 import com.anurag.socialmedia_gfg1.R
+import com.anurag.socialmedia_gfg1.utils.UserUtils
 import de.hdodenhof.circleimageview.CircleImageView
 
 
@@ -27,6 +28,13 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         userImage = view.findViewById(R.id.user_image)
         val userName: EditText = view.findViewById(R.id.user_name)
+        val userBio: EditText = view.findViewById(R.id.user_bio)
+        val saveButton: EditText = view.findViewById(R.id.save_button)
+        val logoutButton: EditText = view.findViewById(R.id.user_name)
+
+        userName.setText(UserUtils.user?.name)
+        userBio.setText(UserUtils.user?.bio)
+
 
     }
 
