@@ -130,7 +130,12 @@ class ProfileFragment : Fragment() {
                 }?.addOnCompleteListener { urlTaskCompleted ->
                     if(urlTaskCompleted.isSuccessful){
                         val downloadUri = urlTaskCompleted.result
-                        val newUser = User(id= UserUtils.user?.id)
+                        val newUser = User(id= UserUtils.user?.id.toString(),
+                            name= UserUtils.user?.name.toString(),
+                            email = UserUtils.user?.email.toString(),
+                            bio = UserUtils.user?.bio.toString(),
+                            imageUrl = downloadUri.toString()
+                        )
                     }
                 }
             }
