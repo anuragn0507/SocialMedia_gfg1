@@ -136,6 +136,18 @@ class ProfileFragment : Fragment() {
                             bio = UserUtils.user?.bio.toString(),
                             imageUrl = downloadUri.toString()
                         )
+
+                        fireStore.collection("Users").document(UserUtils.user?.id.toString())
+                            .set(newUser).addOnCompleteListener { saved ->
+                                if(saved.isSuccessful){
+                                    UserUtils.getCurrentUser()
+                                    Toast.makeText(context,"Image Uploaded",Toast.LENGTH_LONG).show()
+                                }else{
+                                    Toast.makeText(context,"Something went wrong, Please try again.",Toast.LENGTH_LONG).show()
+
+                                }
+
+                            }
                     }
                 }
             }
