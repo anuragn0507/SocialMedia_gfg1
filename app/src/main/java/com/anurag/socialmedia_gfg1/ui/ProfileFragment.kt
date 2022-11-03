@@ -143,11 +143,12 @@ class ProfileFragment : Fragment() {
                                     UserUtils.getCurrentUser()
                                     Toast.makeText(context,"Image Uploaded",Toast.LENGTH_LONG).show()
                                 }else{
-                                    Toast.makeText(context,"Something went wrong, Please try again.",Toast.LENGTH_LONG).show()
-
+                                    Toast.makeText(context,"Something went wrong while uploading image, Please try again.",Toast.LENGTH_LONG).show()
                                 }
-
                             }
+                    }
+                    else{
+                        Toast.makeText(context,"Something went wrong while uploading image, Please try again.",Toast.LENGTH_LONG).show()
                     }
                 }
             }
