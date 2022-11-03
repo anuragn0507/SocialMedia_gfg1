@@ -148,7 +148,7 @@ class ProfileFragment : Fragment() {
                             }
                     }
                     else{
-                        Toast.makeText(context,"Something went wrong while uploading image, Please try again.",Toast.LENGTH_LONG).show()
+                        Toast.makeText(context,"Something went wrong , Please try again.",Toast.LENGTH_LONG).show()
                     }
                 }
             }
